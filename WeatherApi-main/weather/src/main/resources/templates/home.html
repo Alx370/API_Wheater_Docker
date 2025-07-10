@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Città</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    
+    <h1>Home</h1>
+
+    <h1>Seleziona un Comune</h1>
+
+    <form action="/weather" method="get">
+        <select name="comuneId">
+            <option th:each="comune : ${comuni}"
+                    th:value="${comune.id}"
+                    th:text="${comune.nome}"></option>
+        </select>
+        <button type="submit">Vedi Temperatura</button>
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    
+    <h1>Meteo</h1>
+
+    <h1>Seleziona un Comune</h1>
+
+    <form action="/weather" method="get">
+        <select name="comuneId">
+            <option th:each="comune : ${comuni}"
+                    th:value="${comune.id}"
+                    th:text="${comune.nome}"></option>
+        </select>
+        <button type="submit">Vedi Temperatura</button>
+    </form>
+
+    <div class="meteo-box">
+    <h2 th:text="'Meteo per ' + ${comune.nome}"></h2>
+
+        <div class="temperature-cards">
+            <div class="card">
+                <h3>Temperatura attuale</h3>
+                <p><span th:text="${meteo.temperaturaAttuale} + '°C'"></span></p>
+            </div>
+
+            <div class="card">
+                <h3>Temperatura minima</h3>
+                <p><span th:text="${meteo.temperaturaMin} + '°C'"></span></p>
+            </div>
+
+            <div class="card">
+                <h3>Temperatura massima</h3>
+                <p><span th:text="${meteo.temperaturaMax} + '°C'"></span></p>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="/">Torna alla Home</a>
+
+</body>
+</html>
