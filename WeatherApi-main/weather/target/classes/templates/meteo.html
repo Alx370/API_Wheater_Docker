@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meteo</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     
@@ -42,8 +43,56 @@
         </div>
     </div>
 
+      <div class="chart-container">
+            <canvas id="tempChart"></canvas>
+        </div>
+
 
     <a href="/">Torna alla Home</a>
 
 </body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const tempChart = document.getElementById('tempChart');
+
+    const data = {
+        labels: ['Attuale', 'Minima', 'Massima'],
+        datasets: [{
+            label: 'Temperature (°C)',
+            data: [
+                /*[[${meteo.temperaturaAttuale}]]*/,
+                /*[[${meteo.temperaturaMin}]]*/,
+                /*[[${meteo.temperaturaMax}]]*/
+            ],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(255, 206, 86, 0.6)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    new Chart(tempChart, {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 5
+                    }
+                }
+            }
+        }
+    });
+    /*]]>*/
+</script>
 </html>
